@@ -5,7 +5,7 @@
 # Imports
 import upload
 import download
-import initialize
+from initialize import Profile
 
 # Variable Definition
 profiles = []
@@ -23,18 +23,18 @@ def main():
 
     while temp_continue == True:
         temp_option = input("""
-            Choose the right option:
-                1.Initialize
-                2.Change profile
-                2.Backup
-                3.Backdown
-                5.Exit
-                """)
+        Choose the right option:
+            1.Initialize
+            2.Change profile
+            3.Backup
+            4.Backdown
+            5.Exit
+            """)
         try:
             option = int(temp_option)
             # I didn't use switch case here because professor told us in class :)
             if (option == 1):
-                temp_obj = initialize.profile()
+                temp_obj = Profile(profiles)
                 profiles.append(temp_obj)
                 continue
 
@@ -43,9 +43,10 @@ def main():
                     print("No profiles available. Please Initialize first")
                     continue
                 else:
-                    print(profiles)
+                    for i in profiles :
+                        print(i.name)
                     try : # Error catching in case User does not Enter number
-                        temp_profile = int(input("Enter profile name"))
+                        temp_profile = int(input("Enter profile number : "))
                         if (temp_profile < len(profiles)):
                             current_profile = temp_profile
                             print(f"Profile changed to profile_{temp_profile}")

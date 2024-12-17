@@ -1,10 +1,9 @@
 # Imports
 import os
-from main import profiles
 
 
 # Class(es)
-class profile:
+class Profile:
     # Defining Variables
     name = ""
     client_folder_path = "./"
@@ -14,7 +13,8 @@ class profile:
     server_username = ""
     server_password = ""
 
-    def __init__(self): # Just forwarded to be able to change in case of adding database
+    def __init__(self, profiles): # Just forwarded to be able to change in case of adding database
+
         self.name = f"profile_{len(profiles)}"
         print(f"the Name of this profile is {self.name}")
         self.initialize()
@@ -49,10 +49,11 @@ class profile:
                     print("Wrong IP address, try again")
                     break
             if(not valid):
-                break
+                continue
             self.server_ip = temp
             print(f"IP successfully changed to {self.server_ip}")
             temp = ""
+            break
         # This part is for data that we can't check
         while check:
             temp = input("Enter the name of the shared folder on the Server : ")
@@ -61,7 +62,7 @@ class profile:
                 continue
             self.server_share = temp
             self.server_remote_folder = input("Enter the address of the folder on the Server : ") # This can possibly be empty and its fine
-
+            break
         # In this part we collect optional data
         self.server_username = input("Enter Server username (optional) : ")
 
