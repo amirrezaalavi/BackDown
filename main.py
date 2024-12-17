@@ -2,33 +2,80 @@
 # Main program to run on startup
 #
 
+# Imports
 import upload
+import download
+import initialize
 
-
-
-option = 0
-
+# Variable Definition
+profiles = []
+current_profile = -1
 
 
 print("Welcome to BackDown !")
-def main(void):
+
+# Function(s)
+def main():
+    global profiles, current_profile
     # Input option
-    temp_right_option = False
-    while temp_right_option != True:
+    option = 0
+    temp_continue = True
+
+    while temp_continue == True:
         temp_option = input("""
             Choose the right option:
                 1.Initialize
+                2.Change profile
                 2.Backup
-                3.Backdown""")
+                3.Backdown
+                5.Exit
+                """)
         try:
             option = int(temp_option)
-            temp_right_option = True
-
             # I didn't use switch case here because professor told us in class :)
-            if(option == 1):
-                Initialization()
-            elif(option == 2):
-                upload.upload_folder_to_samba()
+            if (option == 1):
+                temp_obj = initialize.profile()
+                profiles.append(temp_obj)
+                continue
+
+            elif (option == 2):
+                if (len(profiles) == 0):
+                    print("No profiles available. Please Initialize first")
+                    continue
+                else:
+                    print(profiles)
+                    try : # Error catching in case User does not Enter number
+                        temp_profile = int(input("Enter profile name"))
+                        if (temp_profile < len(profiles)):
+                            current_profile = temp_profile
+                            print(f"Profile changed to profile_{temp_profile}")
+                        else:
+                            print("Profile does not exists")
+                    except Exception as e:
+                        print(f"Error occured : {e}")
+
+                    continue
+
+            elif (option == 3):
+                if (current_profile < 0):
+                    print("No profiles available. Please Initialize first")
+                else:
+                    upload.upload_folder_to_samba(profiles[current_profile])
+
+                continue
+
+            elif (option == 4):
+                if (current_profile < 0):
+                    print("No profiles available. Please Initialize first")
+                else:
+                    download.download_folder_from_samba(profiles[current_profile])
+                continue
+
+            elif (option == 5):
+                print("GoodBye!")
+                break
+            else:
+                print("Wrong Number")
 
         except ValueError:
             print("Enter a Number please!")
@@ -36,10 +83,4 @@ def main(void):
 
 
 
-
-
-
-
-
-def Initialization ():
-    pass
+main() # Run the main function at start, maybe in future add args for terminal arguments
