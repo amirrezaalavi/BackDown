@@ -3,7 +3,8 @@ from smb.SMBConnection import SMBConnection
 import platform
 
 
-client_name = platform.node()
+client_name = platform.node() # Other methods are OS dependent
+
 def download_folder_from_samba(server_share, server_username, server_password, server_ip, server_remote_folder, local_folder_path):
     # Create an SMB connection
     conn = SMBConnection(server_username, server_password, client_name, server_ip, use_ntlm_v2=True)
@@ -17,8 +18,8 @@ def download_folder_from_samba(server_share, server_username, server_password, s
 
         for remote_file in remote_files:
             if not remote_file.isDirectory:
-                remote_file_path = os.path.join(server_remote_folder, remote_file.filename).replace(os.sep, '/')
-                local_file_path = os.path.join(local_folder_path, remote_file.filename)
+                remote_file_path = os.path.join(server_remote_folder, remote_file.filename).replace(os.sep, '/') # File address, then standardize to /../ format
+                local_file_path = os.path.join(local_folder_path, remote_file.filename) # Full address on local Computer
 
                 # Create local directories if they don't exist
                 os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
