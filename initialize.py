@@ -1,14 +1,22 @@
+# Imports
 import os
+from main import profiles
 
+
+# Class(es)
 class profile:
-
+    # Defining Variables
+    name = ""
     client_folder_path = "./"
     server_ip = ""
     server_share = "./"
     server_remote_folder = ""
     server_username = ""
     server_password = ""
+
     def __init__(self): # Just forwarded to be able to change in case of adding database
+        self.name = f"profile_{len(profiles)}"
+        print(f"the Name of this profile is {self.name}")
         self.initialize()
 
 
