@@ -17,10 +17,10 @@ class Profile:
 
         self.name = f"profile_{len(profiles)}"
         print(f"the Name of this profile is {self.name}")
-        self.initialize()
+        self.Initialize()
 
 
-    def initialize(self):
+    def Initialize(self):
         temp = ""
         check = True # For Ensuring every data Enters correctly, just in case we want to save data to database later
         print("Initialization ...")

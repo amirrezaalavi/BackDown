@@ -15,7 +15,7 @@ current_profile = -1
 print("Welcome to BackDown !")
 
 # Function(s)
-def main():
+def Main():
     global profiles, current_profile
     # Input option
     option = 0
@@ -61,7 +61,7 @@ def main():
                 if (current_profile < 0):
                     print("No profiles available. Please Initialize first")
                 else:
-                    upload.upload_folder_to_samba(profiles[current_profile])
+                    upload.Upload_folder_to_samba(profiles[current_profile])
 
                 continue
 
@@ -69,7 +69,7 @@ def main():
                 if (current_profile < 0):
                     print("No profiles available. Please Initialize first")
                 else:
-                    download.download_folder_from_samba(profiles[current_profile])
+                    download.Download_folder_from_samba(profiles[current_profile])
                 continue
 
             elif (option == 5):
@@ -84,4 +84,4 @@ def main():
 
 
 
-main() # Run the main function at start, maybe in future add args for terminal arguments
+Main() # Run the main function at start, maybe in future add args for terminal arguments

@@ -9,7 +9,7 @@ client_name = platform.node()
 
 
 # Function(s)
-def upload_folder_to_samba(profile): # Import one profile as Object
+def Upload_folder_to_samba(profile): # Import one profile as Object
     # Create an SMB connection
     conn = SMBConnection(profile.server_username, profile.server_password, client_name, profile.server_ip , use_ntlm_v2=True) # client_name is the name  for identification from the server side
 

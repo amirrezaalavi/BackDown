@@ -10,7 +10,7 @@ client_name = platform.node() # Other methods are OS dependent
 
 
 # Function(s)
-def download_folder_from_samba(profile):
+def Download_folder_from_samba(profile):
     # Create an SMB connection
     conn = SMBConnection(profile.server_username, profile.server_password, client_name, profile.server_ip, use_ntlm_v2=True)
 
@@ -37,7 +37,7 @@ def download_folder_from_samba(profile):
 
             elif remote_file.isDirectory:
                 # Recursively download subdirectories (to copy inside of every folder as well)
-                download_folder_from_samba(profile.server_share, profile.server_username, profile.server_password, profile.server_ip,
+                Download_folder_from_samba(profile.server_share, profile.server_username, profile.server_password, profile.server_ip,
                                             os.path.join(profile.server_remote_folder, remote_file.filename),
                                             os.path.join(profile.client_folder_path, remote_file.filename))
     except :
