@@ -14,9 +14,9 @@ def Download_folder_from_samba(profile):
     # Create an SMB connection
     conn = SMBConnection(profile.server_username, profile.server_password, client_name, profile.server_ip, use_ntlm_v2=True)
 
-    try:
+    try: # Error catching to prevent app from crashing on Error
         # Connect to the Samba server
-        conn.connect(profile.server_ip, 445)
+        conn.connect(profile.server_ip, 445) # Default port for Samba
 
         # List all files in the remote directory
         remote_files = conn.listPath(profile.server_share, profile.server_remote_folder)

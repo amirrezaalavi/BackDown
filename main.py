@@ -15,6 +15,26 @@ current_profile = -1
 print("Welcome to BackDown !")
 
 # Function(s)
+def Change_profile():
+    global profiles, current_profile
+    if (len(profiles) == 0):
+        print("No profiles available. Please Initialize first")
+        return
+    for i in profiles :
+        print(i.name)
+    try : # Error catching in case User does not Enter number
+        temp_profile = int(input("Enter profile number : "))
+        if (temp_profile < len(profiles)):
+            current_profile = temp_profile
+            print(f"Profile changed to profile_{temp_profile}")
+        else:
+            print("Profile does not exists")
+    except Exception as e:
+        print(f"Error occured : {e}")
+
+
+
+
 def Main():
     global profiles, current_profile
     # Input option
@@ -39,23 +59,8 @@ def Main():
                 continue
 
             elif (option == 2):
-                if (len(profiles) == 0):
-                    print("No profiles available. Please Initialize first")
-                    continue
-                else:
-                    for i in profiles :
-                        print(i.name)
-                    try : # Error catching in case User does not Enter number
-                        temp_profile = int(input("Enter profile number : "))
-                        if (temp_profile < len(profiles)):
-                            current_profile = temp_profile
-                            print(f"Profile changed to profile_{temp_profile}")
-                        else:
-                            print("Profile does not exists")
-                    except Exception as e:
-                        print(f"Error occured : {e}")
-
-                    continue
+                Change_profile()
+                continue
 
             elif (option == 3):
                 if (current_profile < 0):

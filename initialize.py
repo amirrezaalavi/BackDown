@@ -40,15 +40,17 @@ class Profile:
         while check:
             temp = input("Enter ip address of the server (IPv4 only): ")
             valid = True
+            temp_parts = 0
             temp_ip = temp.split('.')
             for part in temp_ip :
                 try :
                     int(part)
+                    temp_parts += 1
                 except :
                     valid = False
-                    print("Wrong IP address, try again")
                     break
-            if(not valid):
+            if (not valid) or temp_parts != 4:
+                print("Wrong IP address, try again")
                 continue
             self.server_ip = temp
             print(f"IP successfully changed to {self.server_ip}")
