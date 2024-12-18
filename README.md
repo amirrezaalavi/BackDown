@@ -12,10 +12,20 @@ BackDown is a python project for uploading folders to a samba/SMB server and Dow
 
 First clone the project using `git` or download and extract the zip file, then head to the parent folder and enter a Terminal(or Powershell for Windows). write `python3 -m venv BackDown` to recreate the python enviroment. Then type `source BackDown/bin/activate` (or `BackDown\bin\Activate.ps1` for PowerShell)
 now to install required packages, run `pip install -r requirements.txt` and then run the project : `python3 BackDown/main.py`
+***
+## 2. General workaround
+User first initializes a profile and enters the information. Then will choose to upload files to the server or download from server. if user needs, they will create new profiles and if they want, they can choose between what profiles to use
+
+
+**User --> main.py (early choice) --> Initialize.py (data entry) --> main.py (choose other options)--> upload.py or download.py (file transfer) --> main.py (choose again)**
+
 
 ***
 
-## 2. Describing files
+## 3. Describing files
+
+### Upload and Download
+
 The `upload.py` and `download.py` files are for uploading a folder to a server (defined by user). they both require a object of `Profile` method which is inside `initialize.py`. Then using the variables they will try to stablish a connection with server.
 `Download_folder_from_samba` inside `download.py` will try to recursivally download every file in `server_remote_folder` parameter of the recieved profile and `Upload_folder_to_samba` from `upload.py` tries to upload the file from `client_folder_path` to the server.
 These two parts of program both import `os`, `platform`, `smb.SMBConnection`.
@@ -32,10 +42,13 @@ Then tries to connect to server using port 445 and IPv4. Then lists every file a
 
 `Upload_folder_to_samba` from `upload.py` does similarlly the same thing, Just instead of recursive function methods, it loops inside the folder and send every file with full path to Samba server using `StoreFile()` method.
 
+### Main file
 
 `main.py` contains a function called `Main()` which is for when the program starts and handling early user input. it also contains `profiles[]` which is the array of different profiles as Objects, and `current_profile` which defines what profile user wants to work with. `main.py` will get user options to choose what function to call, or to make a new object of `Profile` method.
 `Main()` will start with showing the menu and prompt user for input, to then call the related function.
 Also `Change_profile` is for changing the profile if any other exists.
+
+### Initialization
 
 Finally `initialize.py` contains a class called `Profile` which is for defining a new profile, and contains these parameters:
 * `name` : name of the object created by the program itself, pattern is profile_x where x is a natural number.
@@ -51,19 +64,20 @@ These variables would be saved as parameters of a class. and be returned to `Mai
 
 ---
 
-## 3. Describing functions and methods and their usage
+## 4. Describing functions and methods and their usage
 
 | Name | Usage |
 |:-----|:----:|
 |function `Main` |Run the project and interact with user|
 |function `Download_folder_from_samba`|Download the Folder and copy it to specified Folder|
 |function `Upload_folder_to_samba`|Upload the specified Folder to the server|
-|function `Initialize`|Get every parameter from user and save to an object
+|function `Initialize`|Get every parameter from user and save to an object|
+|function `Change_profile`|Change current profile that user is working on|
 |class `Profiles`|Creating profiles for handling Variables|
 
 ***
 
-## 4. Future of the project
+## 5. Future of the project
 Main things I want to add:
 1. Save profiles to a file so User won't have to enter data every time. Possibly add DataBase to store more data.
 2. Terminal Arguments so User won't have to interact with interface every time.
