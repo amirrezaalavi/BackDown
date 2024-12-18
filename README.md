@@ -5,7 +5,7 @@ BackDown is a python project for uploading folders to a samba/SMB server and Dow
 
 # How does it works?
 
-## 1. The whole process
+## 1. How to run the project
 User should run `main.py` using python3, e.g. `python3 main.py` (shell arguments are not supported yet); then a menu of Options will appear. User should Initialize some profiles and then do what they want.
 
 ## 2. Describing files
